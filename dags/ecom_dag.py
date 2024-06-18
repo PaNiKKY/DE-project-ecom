@@ -1,0 +1,31 @@
+from airflow.models.dag import DAG
+from datetime import datetime
+from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
+from airflow.operators.python_operator import PythonOperator
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from etl.extract_load_staging import load_to_staging
+
+
+
+default_args = {
+    "start_date":datetime(2024,6,15),
+}
+
+with DAG(
+    dag_id="etl_ecomerc_pipeline_test_extract",
+    default_args=default_args,
+    schedule_interval = "@monthly",
+    catchup=False,
+    tags=["etl", "ecom"]
+) as dag:
+    #extraction
+    extract_csv = PythonOperator(
+        task_id = "load_cvs_to_staging",
+        python_callable = load_to_staging
+    )
+    
+    extract_csv
