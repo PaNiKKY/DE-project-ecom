@@ -1,44 +1,0 @@
-[2024-06-19T10:46:07.145+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
-[2024-06-19T10:46:07.199+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_ecomerc_pipeline_test_extract_v2.download_api manual__2024-06-19T10:46:06.121368+00:00 [queued]>
-[2024-06-19T10:46:07.206+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_ecomerc_pipeline_test_extract_v2.download_api manual__2024-06-19T10:46:06.121368+00:00 [queued]>
-[2024-06-19T10:46:07.206+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
-[2024-06-19T10:46:07.217+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): download_api> on 2024-06-19 10:46:06.121368+00:00
-[2024-06-19T10:46:07.224+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'etl_ecomerc_pipeline_test_extract_v2', 'download_api', 'manual__2024-06-19T10:46:06.121368+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/ecom_dag.py', '--cfg-path', '/tmp/tmpx8dq4ski']
-[2024-06-19T10:46:07.226+0000] {standard_task_runner.py:91} INFO - Job 6: Subtask download_api
-[2024-06-19T10:46:07.227+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=1005) is multi-threaded, use of fork() may lead to deadlocks in the child.
-[2024-06-19T10:46:07.227+0000] {standard_task_runner.py:63} INFO - Started process 1007 to run task
-[2024-06-19T10:46:07.314+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_ecomerc_pipeline_test_extract_v2.download_api manual__2024-06-19T10:46:06.121368+00:00 [running]> on host 6ce084ea7fd5
-[2024-06-19T10:46:07.613+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_ecomerc_pipeline_test_extract_v2' AIRFLOW_CTX_TASK_ID='download_api' AIRFLOW_CTX_EXECUTION_DATE='2024-06-19T10:46:06.121368+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-06-19T10:46:06.121368+00:00'
-[2024-06-19T10:46:07.614+0000] {taskinstance.py:430} INFO - ::endgroup::
-[2024-06-19T10:46:07.632+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
-[2024-06-19T10:46:07.634+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'kaggle datasets download -d devarajv88/target-dataset && unzip target-dataset.zip -d /opt/***/data/']
-[2024-06-19T10:46:07.646+0000] {subprocess.py:86} INFO - Output:
-[2024-06-19T10:46:10.864+0000] {subprocess.py:93} INFO - Dataset URL: https://www.kaggle.com/datasets/devarajv88/target-dataset
-[2024-06-19T10:46:10.865+0000] {subprocess.py:93} INFO - License(s): other
-[2024-06-19T10:46:10.865+0000] {subprocess.py:93} INFO - Downloading target-dataset.zip to /tmp/***tmpcnqooo4g
-[2024-06-19T10:46:14.093+0000] {subprocess.py:93} INFO -   0%|          | 0.00/36.2M [00:00<?, ?B/s]  3%|▎         | 1.00M/36.2M [00:01<00:40, 915kB/s]  6%|▌         | 2.00M/36.2M [00:01<00:19, 1.85MB/s] 11%|█         | 4.00M/36.2M [00:01<00:08, 3.92MB/s] 17%|█▋        | 6.00M/36.2M [00:01<00:04, 6.34MB/s] 22%|██▏       | 8.00M/36.2M [00:01<00:03, 7.89MB/s] 28%|██▊       | 10.0M/36.2M [00:01<00:02, 10.1MB/s] 36%|███▌      | 13.0M/36.2M [00:01<00:01, 13.6MB/s] 41%|████▏     | 15.0M/36.2M [00:02<00:01, 15.0MB/s] 50%|████▉     | 18.0M/36.2M [00:02<00:01, 17.3MB/s] 58%|█████▊    | 21.0M/36.2M [00:02<00:00, 19.3MB/s] 66%|██████▋   | 24.0M/36.2M [00:02<00:00, 17.0MB/s] 72%|███████▏  | 26.0M/36.2M [00:02<00:00, 17.7MB/s] 77%|███████▋  | 28.0M/36.2M [00:02<00:00, 18.3MB/s] 86%|████████▌ | 31.0M/36.2M [00:02<00:00, 19.6MB/s] 91%|█████████ | 33.0M/36.2M [00:03<00:00, 19.2MB/s] 97%|█████████▋| 35.0M/36.2M [00:03<00:00, 19.2MB/s]100%|██████████| 36.2M/36.2M [00:03<00:00, 11.8MB/s]
-[2024-06-19T10:46:14.094+0000] {subprocess.py:93} INFO - 
-[2024-06-19T10:46:14.128+0000] {subprocess.py:93} INFO - Archive:  target-dataset.zip
-[2024-06-19T10:46:14.129+0000] {subprocess.py:93} INFO - replace /opt/***/data/customers.csv? [y]es, [n]o, [A]ll, [N]one, [r]ename:  NULL
-[2024-06-19T10:46:14.130+0000] {subprocess.py:93} INFO - (EOF or read error, treating as "[N]one" ...)
-[2024-06-19T10:46:14.135+0000] {subprocess.py:97} INFO - Command exited with return code 1
-[2024-06-19T10:46:14.142+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
-[2024-06-19T10:46:14.215+0000] {taskinstance.py:2905} ERROR - Task failed with exception
-Traceback (most recent call last):
-  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
-    result = _execute_callable(context=context, **execute_callable_kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
-    return execute_callable(context=context, **execute_callable_kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
-    return func(self, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/bash.py", line 243, in execute
-    raise AirflowException(
-airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
-[2024-06-19T10:46:14.220+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=etl_ecomerc_pipeline_test_extract_v2, task_id=download_api, run_id=manual__2024-06-19T10:46:06.121368+00:00, execution_date=20240619T104606, start_date=20240619T104607, end_date=20240619T104614
-[2024-06-19T10:46:14.297+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 6 for task download_api (Bash command failed. The command returned a non-zero exit code 1.; 1007)
-[2024-06-19T10:46:14.339+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
-[2024-06-19T10:46:14.375+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
-[2024-06-19T10:46:14.377+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

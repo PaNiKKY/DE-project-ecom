@@ -1,34 +1,0 @@
-[2024-06-19T11:05:35.982+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
-[2024-06-19T11:05:36.036+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_ecomerc_pipeline_test_extract_v3.download_api manual__2024-06-19T11:05:35.149914+00:00 [queued]>
-[2024-06-19T11:05:36.047+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_ecomerc_pipeline_test_extract_v3.download_api manual__2024-06-19T11:05:35.149914+00:00 [queued]>
-[2024-06-19T11:05:36.047+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
-[2024-06-19T11:05:36.060+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): download_api> on 2024-06-19 11:05:35.149914+00:00
-[2024-06-19T11:05:36.068+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'etl_ecomerc_pipeline_test_extract_v3', 'download_api', 'manual__2024-06-19T11:05:35.149914+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/ecom_dag.py', '--cfg-path', '/tmp/tmpcei_kg3j']
-[2024-06-19T11:05:36.069+0000] {standard_task_runner.py:91} INFO - Job 8: Subtask download_api
-[2024-06-19T11:05:36.070+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=1626) is multi-threaded, use of fork() may lead to deadlocks in the child.
-[2024-06-19T11:05:36.071+0000] {standard_task_runner.py:63} INFO - Started process 1630 to run task
-[2024-06-19T11:05:36.151+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_ecomerc_pipeline_test_extract_v3.download_api manual__2024-06-19T11:05:35.149914+00:00 [running]> on host 6ce084ea7fd5
-[2024-06-19T11:05:36.427+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_ecomerc_pipeline_test_extract_v3' AIRFLOW_CTX_TASK_ID='download_api' AIRFLOW_CTX_EXECUTION_DATE='2024-06-19T11:05:35.149914+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-06-19T11:05:35.149914+00:00'
-[2024-06-19T11:05:36.428+0000] {taskinstance.py:430} INFO - ::endgroup::
-[2024-06-19T11:05:36.441+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
-[2024-06-19T11:05:36.442+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'kaggle datasets download -d devarajv88/target-dataset && unzip -o target-dataset.zip -d /opt/***/data/']
-[2024-06-19T11:05:36.454+0000] {subprocess.py:86} INFO - Output:
-[2024-06-19T11:05:38.573+0000] {subprocess.py:93} INFO - Dataset URL: https://www.kaggle.com/datasets/devarajv88/target-dataset
-[2024-06-19T11:05:38.573+0000] {subprocess.py:93} INFO - License(s): other
-[2024-06-19T11:05:38.574+0000] {subprocess.py:93} INFO - Downloading target-dataset.zip to /tmp/***tmpmjhpyfp7
-[2024-06-19T11:05:41.169+0000] {subprocess.py:93} INFO -   0%|          | 0.00/36.2M [00:00<?, ?B/s]  3%|▎         | 1.00M/36.2M [00:00<00:26, 1.41MB/s]  6%|▌         | 2.00M/36.2M [00:00<00:13, 2.58MB/s] 11%|█         | 4.00M/36.2M [00:01<00:06, 5.23MB/s] 17%|█▋        | 6.00M/36.2M [00:01<00:03, 7.98MB/s] 25%|██▍       | 9.00M/36.2M [00:01<00:02, 11.7MB/s] 33%|███▎      | 12.0M/36.2M [00:01<00:01, 15.2MB/s] 39%|███▊      | 14.0M/36.2M [00:01<00:01, 16.3MB/s] 44%|████▍     | 16.0M/36.2M [00:01<00:01, 16.9MB/s] 50%|████▉     | 18.0M/36.2M [00:01<00:01, 17.8MB/s] 55%|█████▌    | 20.0M/36.2M [00:01<00:00, 18.3MB/s] 64%|██████▎   | 23.0M/36.2M [00:01<00:00, 20.3MB/s] 72%|███████▏  | 26.0M/36.2M [00:02<00:00, 20.6MB/s] 80%|████████  | 29.0M/36.2M [00:02<00:00, 22.1MB/s] 88%|████████▊ | 32.0M/36.2M [00:02<00:00, 22.7MB/s] 97%|█████████▋| 35.0M/36.2M [00:02<00:00, 23.0MB/s]100%|██████████| 36.2M/36.2M [00:02<00:00, 14.6MB/s]
-[2024-06-19T11:05:41.169+0000] {subprocess.py:93} INFO - 
-[2024-06-19T11:05:41.210+0000] {subprocess.py:93} INFO - Archive:  target-dataset.zip
-[2024-06-19T11:05:41.360+0000] {subprocess.py:93} INFO -   inflating: /opt/***/data/customers.csv
-[2024-06-19T11:05:42.122+0000] {subprocess.py:93} INFO -   inflating: /opt/***/data/geolocation.csv
-[2024-06-19T11:05:42.370+0000] {subprocess.py:93} INFO -   inflating: /opt/***/data/order_items.csv
-[2024-06-19T11:05:42.630+0000] {subprocess.py:93} INFO -   inflating: /opt/***/data/orders.csv
-[2024-06-19T11:05:42.723+0000] {subprocess.py:93} INFO -   inflating: /opt/***/data/payments.csv
-[2024-06-19T11:05:42.763+0000] {subprocess.py:93} INFO -   inflating: /opt/***/data/products.csv
-[2024-06-19T11:05:42.770+0000] {subprocess.py:93} INFO -   inflating: /opt/***/data/sellers.csv
-[2024-06-19T11:05:42.771+0000] {subprocess.py:97} INFO - Command exited with return code 0
-[2024-06-19T11:05:42.777+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
-[2024-06-19T11:05:42.851+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=etl_ecomerc_pipeline_test_extract_v3, task_id=download_api, run_id=manual__2024-06-19T11:05:35.149914+00:00, execution_date=20240619T110535, start_date=20240619T110536, end_date=20240619T110542
-[2024-06-19T11:05:42.907+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
-[2024-06-19T11:05:42.943+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
-[2024-06-19T11:05:42.950+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
