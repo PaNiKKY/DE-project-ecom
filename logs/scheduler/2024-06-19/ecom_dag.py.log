@@ -1486,3 +1486,24 @@ NameError: name 'transformation' is not defined
 [2024-06-19T11:11:27.217+0000] {logging_mixin.py:188} INFO - [2024-06-19T11:11:27.217+0000] {dag.py:3096} INFO - Sync 1 DAGs
 [2024-06-19T11:11:27.279+0000] {logging_mixin.py:188} INFO - [2024-06-19T11:11:27.278+0000] {dag.py:3954} INFO - Setting next_dagrun for etl_ecomerc_pipeline_test_extract_v3 to 2024-07-01 00:00:00+00:00, run_after=2024-08-01 00:00:00+00:00
 [2024-06-19T11:11:27.345+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/ecom_dag.py took 0.392 seconds
+[2024-06-19T11:11:57.541+0000] {processor.py:161} INFO - Started process (PID=1853) to work on /opt/airflow/dags/ecom_dag.py
+[2024-06-19T11:11:57.541+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/ecom_dag.py for tasks to queue
+[2024-06-19T11:11:57.542+0000] {logging_mixin.py:188} INFO - [2024-06-19T11:11:57.542+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/ecom_dag.py
+[2024-06-19T11:11:57.780+0000] {processor.py:840} INFO - DAG(s) 'etl_ecomerc_pipeline_test_extract_v3' retrieved from /opt/airflow/dags/ecom_dag.py
+[2024-06-19T11:11:57.810+0000] {logging_mixin.py:188} INFO - [2024-06-19T11:11:57.810+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2024-06-19T11:11:57.829+0000] {logging_mixin.py:188} INFO - [2024-06-19T11:11:57.829+0000] {dag.py:3954} INFO - Setting next_dagrun for etl_ecomerc_pipeline_test_extract_v3 to 2024-07-01 00:00:00+00:00, run_after=2024-08-01 00:00:00+00:00
+[2024-06-19T11:11:57.968+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/ecom_dag.py took 0.431 seconds
+[2024-06-19T11:12:28.177+0000] {processor.py:161} INFO - Started process (PID=1865) to work on /opt/airflow/dags/ecom_dag.py
+[2024-06-19T11:12:28.178+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/ecom_dag.py for tasks to queue
+[2024-06-19T11:12:28.179+0000] {logging_mixin.py:188} INFO - [2024-06-19T11:12:28.178+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/ecom_dag.py
+[2024-06-19T11:12:28.426+0000] {processor.py:840} INFO - DAG(s) 'etl_ecomerc_pipeline_test_extract_v3' retrieved from /opt/airflow/dags/ecom_dag.py
+[2024-06-19T11:12:28.464+0000] {logging_mixin.py:188} INFO - [2024-06-19T11:12:28.463+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2024-06-19T11:12:28.604+0000] {logging_mixin.py:188} INFO - [2024-06-19T11:12:28.604+0000] {dag.py:3954} INFO - Setting next_dagrun for etl_ecomerc_pipeline_test_extract_v3 to 2024-07-01 00:00:00+00:00, run_after=2024-08-01 00:00:00+00:00
+[2024-06-19T11:12:28.629+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/ecom_dag.py took 0.457 seconds
+[2024-06-19T11:12:58.818+0000] {processor.py:161} INFO - Started process (PID=1877) to work on /opt/airflow/dags/ecom_dag.py
+[2024-06-19T11:12:58.819+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/ecom_dag.py for tasks to queue
+[2024-06-19T11:12:58.820+0000] {logging_mixin.py:188} INFO - [2024-06-19T11:12:58.820+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/ecom_dag.py
+[2024-06-19T11:12:59.049+0000] {processor.py:840} INFO - DAG(s) 'etl_ecomerc_pipeline_test_extract_v3' retrieved from /opt/airflow/dags/ecom_dag.py
+[2024-06-19T11:12:59.085+0000] {logging_mixin.py:188} INFO - [2024-06-19T11:12:59.084+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2024-06-19T11:12:59.226+0000] {logging_mixin.py:188} INFO - [2024-06-19T11:12:59.226+0000] {dag.py:3954} INFO - Setting next_dagrun for etl_ecomerc_pipeline_test_extract_v3 to 2024-07-01 00:00:00+00:00, run_after=2024-08-01 00:00:00+00:00
+[2024-06-19T11:12:59.256+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/ecom_dag.py took 0.442 seconds
