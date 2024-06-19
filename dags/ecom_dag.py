@@ -17,7 +17,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id="etl_ecomerc_pipeline_test_extract_v2",
+    dag_id="etl_ecomerc_pipeline_test_extract_v3",
     default_args=default_args,
     schedule_interval = "@monthly",
     catchup=False,
@@ -26,12 +26,13 @@ with DAG(
     #extraction
     pull_api =  BashOperator(
         task_id = "download_api",
-        bash_command='kaggle datasets download -d devarajv88/target-dataset && unzip target-dataset.zip -d /opt/airflow/data/'
+        bash_command='kaggle datasets download -d devarajv88/target-dataset && unzip -o target-dataset.zip -d /opt/airflow/data/'
     )
-    # extract_csv = PythonOperator(
-    #     task_id = "load_cvs_to_staging",
-    #     python_callable = load_to_staging
-    # )
-    
-    # extract_csv
-    pull_api
+
+    extract_csv = PythonOperator(
+        task_id = "load_cvs_to_staging",
+        python_callable = load_to_staging
+    )
+
+    #transformation
+    pull_api >> extract_csv
