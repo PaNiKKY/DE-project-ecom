@@ -1,5 +1,6 @@
 from airflow.models.dag import DAG
 from datetime import datetime
+from airflow.operators.bash import BashOperator
 from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
 from airflow.operators.python_operator import PythonOperator
 import os
@@ -16,16 +17,21 @@ default_args = {
 }
 
 with DAG(
-    dag_id="etl_ecomerc_pipeline_test_extract",
+    dag_id="etl_ecomerc_pipeline_test_extract_v2",
     default_args=default_args,
     schedule_interval = "@monthly",
     catchup=False,
     tags=["etl", "ecom"]
 ) as dag:
     #extraction
-    extract_csv = PythonOperator(
-        task_id = "load_cvs_to_staging",
-        python_callable = load_to_staging
+    pull_api =  BashOperator(
+        task_id = "download_api",
+        bash_command='kaggle datasets download -d devarajv88/target-dataset && unzip target-dataset.zip -d /opt/airflow/data/'
     )
+    # extract_csv = PythonOperator(
+    #     task_id = "load_cvs_to_staging",
+    #     python_callable = load_to_staging
+    # )
     
-    extract_csv
+    # extract_csv
+    pull_api

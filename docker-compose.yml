@@ -75,7 +75,7 @@ x-airflow-common:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./config:/opt/airflow/config
-    - ./data:/opt/airflow/data
+    - ./data/airflow_data:/opt/airflow/data
     - ./etl:/opt/airflow/etl
     - ./pipelines:/opt/airflow/pipelines
     - ./src:/opt/airflow/src
@@ -94,9 +94,10 @@ services:
     environment:
       POSTGRES_USER: airflow
       POSTGRES_PASSWORD: airflow
-      POSTGRES_MULTIPLE_DATABASES: ecom_DW, ecom_staging 
+      POSTGRES_MULTIPLE_DATABASES: ecom_DW, ecom_staging, airflow
     volumes:
       - ./data/multiple-databases.sh:/docker-entrypoint-initdb.d/multiple-databases.sh
+      - ./data/databases:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "airflow"]
       interval: 10s
@@ -245,9 +246,10 @@ services:
           echo "   https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html#before-you-begin"
           echo
         fi
-        mkdir -p /sources/logs /sources/dags /sources/plugins
-        chown -R "${AIRFLOW_UID}:0" /sources/{logs,dags,plugins}
+        mkdir -p /sources/logs /sources/dags /sources/plugins /sources/data
+        chown -R "${AIRFLOW_UID}:0" /sources/{logs,dags,plugins,data}
         exec /entrypoint airflow version
+    #  chmod g+w -R data/
     # yamllint enable rule:line-length
     environment:
       <<: *airflow-common-env

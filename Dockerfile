@@ -3,6 +3,7 @@ FROM apache/airflow:2.9.2
 USER root
 
 RUN apt-get update \
+  && apt install unzip -y \
   && apt-get install -y --no-install-recommends \
          vim \
   && apt-get autoremove -yqq --purge \
@@ -11,4 +12,4 @@ RUN apt-get update \
 
 USER airflow
 
-RUN pip install --no-cache-dir "apache-airflow==2.9.2" pandas numpy
+RUN pip install --no-cache-dir "apache-airflow==2.9.2" pandas numpy kaggle
