@@ -9,7 +9,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from etl.extract_load_staging import load_to_staging
-from etl.tranform import table_read
+from etl.tranform import transform_table
 
 
 
@@ -18,7 +18,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id="etl_ecomerc_pipeline_test_trans",
+    dag_id="etl_ecomerc_pipeline_test_trans_v4",
     default_args=default_args,
     schedule_interval = "@monthly",
     catchup=False,
@@ -40,10 +40,7 @@ with DAG(
 
     test_read_csv = PythonOperator(
         task_id = "test_read",
-        python_callable = table_read,
-        op_kwargs = {
-            "table_name":"customers"
-        }
+        python_callable = transform_table
     )
 
     test_read_csv
