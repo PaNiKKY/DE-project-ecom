@@ -3,44 +3,45 @@ from datetime import datetime
 from airflow.operators.bash import BashOperator
 from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
 from airflow.operators.python_operator import PythonOperator
+
 import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from etl.extract_load_staging import load_to_staging
-from etl.tranform import transform_table
+from src.constants import OUT_PATH, CURRENT_MONTH_YEAR
+from pipelines.load_s3_pipeline import load_to_S3_pipeline
+# from etl.clean_all import load_to_staging
+# from etl.tranform import transform_table
 
-
+MONTH_YEAR = CURRENT_MONTH_YEAR
 
 default_args = {
     "start_date":datetime(2024,6,15),
 }
 
 with DAG(
-    dag_id="etl_ecomerc_pipeline_test_trans_v4",
+    dag_id="etl_ecomerc_pipeline_loadToS3",
     default_args=default_args,
     schedule_interval = "@monthly",
     catchup=False,
     tags=["etl", "ecom"]
 ) as dag:
     #extraction
-    # pull_api =  BashOperator(
-    #     task_id = "download_api",
-    #     bash_command='kaggle datasets download -d devarajv88/target-dataset && unzip -o target-dataset.zip -d /opt/airflow/data/'
-    # )
-
-    # extract_csv = PythonOperator(
-    #     task_id = "load_cvs_to_staging",
-    #     python_callable = load_to_staging
-    # )
-
-    #transformation
-    # pull_api >> extract_csv 
-
-    test_read_csv = PythonOperator(
-        task_id = "test_read",
-        python_callable = transform_table
+    pull_api =  BashOperator(
+        task_id = "download_api",
+        bash_command=f'kaggle datasets download -d devarajv88/target-dataset && unzip -o target-dataset.zip -d {OUT_PATH}'
     )
 
-    test_read_csv
+    load_to_s3 = PythonOperator(
+        task_id = "load_cvs_to_S3",
+        python_callable = load_to_S3_pipeline,
+        op_kwargs = {"MONTH_YEAR": MONTH_YEAR}
+    )
+
+    # test_read_csv = PythonOperator(
+    #     task_id = "test_read",
+    #     python_callable = transform_table
+    # )
+
+    pull_api >> load_to_s3

@@ -2,3 +2,5 @@ apache-airflow==2.9.2
 pandas==2.0.0
 numpy==1.26.4 
 kaggle
+configparser
+s3fs

@@ -4,3 +4,4 @@ dockercompose.txt
 airflow.env
 data/databases/
 logs/
+config/
