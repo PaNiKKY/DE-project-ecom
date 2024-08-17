@@ -3,6 +3,7 @@ from datetime import datetime
 from airflow.operators.bash import BashOperator
 from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
 from airflow.operators.python_operator import PythonOperator
+import s3fs
 
 import os
 import sys
@@ -10,7 +11,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.constants import OUT_PATH, CURRENT_MONTH_YEAR
-from pipelines.load_s3_pipeline import load_to_S3_pipeline
+from etl.load_to_s3 import connect_to_s3
+from pipelines.load_s3_pipeline import load_to_S3_pipeline, transform_pipeline
 # from etl.clean_all import load_to_staging
 # from etl.tranform import transform_table
 
@@ -39,9 +41,15 @@ with DAG(
         op_kwargs = {"MONTH_YEAR": MONTH_YEAR}
     )
 
-    # test_read_csv = PythonOperator(
-    #     task_id = "test_read",
-    #     python_callable = transform_table
-    # )
+    remove_files =  BashOperator(
+        task_id = "remove_local_files",
+        bash_command=f'rm -f {OUT_PATH}/*.csv'
+    )
 
-    pull_api >> load_to_s3
+    transfrom_load_to_s3 = PythonOperator(
+        task_id = "transform_load_to_s3",
+        python_callable = transform_pipeline,
+        op_kwargs = {"MONTH_YEAR": MONTH_YEAR}
+    )
+
+    pull_api >> load_to_s3 >> [transfrom_load_to_s3, remove_files] 
