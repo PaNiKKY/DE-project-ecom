@@ -19,7 +19,6 @@ def load_to_DW_pipeline(BUCKET_NAME: str):
             table_name = table_name[0]
 
         load_to_postgres(df, engine, table_name)
-
-    tables_constraint(engine)
+        
     print("----Data warehouse building successfully----")
     
