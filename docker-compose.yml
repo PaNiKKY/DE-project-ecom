@@ -94,9 +94,9 @@ services:
     environment:
       POSTGRES_USER: airflow
       POSTGRES_PASSWORD: airflow
-      POSTGRES_DB: ecom_DW
+      POSTGRES_DB: airflow
     volumes:
-      - ./data/databases:/var/lib/postgresql/data
+      - postgres-db-volume:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "airflow"]
       interval: 10s
@@ -295,3 +295,6 @@ services:
   #     <<: *airflow-common-depends-on
   #     airflow-init:
   #       condition: service_completed_successfully
+
+volumes:
+  postgres-db-volume:

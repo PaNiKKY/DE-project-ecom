@@ -21,7 +21,7 @@ def transform_pipeline(MONTH_YEAR: str):
     order_df = order_clean_df(order_df)
     payment_df = payment_clean_df(payment_df)
     merge_df = orders_payments_df(order_df, payment_df)
-    save_df_to_s3(merge_df, s3, AWS_S3_BUCKET, f"{MONTH_YEAR}_orders_payments.csv")
+    save_df_to_s3(merge_df, s3, AWS_S3_BUCKET, f"{MONTH_YEAR}_orders_payments")
     print("orders_payments table loaded successfully")
 
     order_it_df = read_file_from_S3(s3, f"{AWS_S3_BUCKET}/raw/{MONTH_YEAR}_order_items.csv")
@@ -29,7 +29,7 @@ def transform_pipeline(MONTH_YEAR: str):
     order_it_df = order_items_clean_df(order_it_df)
     order_df = order_clean_df(order_df)
     orders_items_customers_df = order_items_df(order_df, order_it_df)
-    save_df_to_s3(orders_items_customers_df, s3, AWS_S3_BUCKET, f"{MONTH_YEAR}_orders_items_customers.csv")
+    save_df_to_s3(orders_items_customers_df, s3, AWS_S3_BUCKET, f"{MONTH_YEAR}_orders_items")
     print("orders_items_customers table loaded successfully")
     
     customer_df = read_file_from_S3(s3, f"{AWS_S3_BUCKET}/raw/{MONTH_YEAR}_customers.csv")
@@ -37,7 +37,7 @@ def transform_pipeline(MONTH_YEAR: str):
     customer_df = customer_clean_df(customer_df)
     geolocation_df = geolocation_clean_df(geolocation_df)
     customers_geo_df = customers_geolocation_df(customer_df, geolocation_df)
-    save_df_to_s3(customers_geo_df, s3, AWS_S3_BUCKET, f"{MONTH_YEAR}_customers_geolocation.csv")
+    save_df_to_s3(customers_geo_df, s3, AWS_S3_BUCKET, f"{MONTH_YEAR}_customers")
     print("customers_geolocation table loaded successfully")
 
     seller_df = read_file_from_S3(s3, f"{AWS_S3_BUCKET}/raw/{MONTH_YEAR}_sellers.csv")
@@ -45,10 +45,10 @@ def transform_pipeline(MONTH_YEAR: str):
     seller_df = seller_clean_df(seller_df)
     geolocation_df = geolocation_clean_df(geolocation_df)
     sellers_geo_df = sellers_geolocation_df(seller_df, geolocation_df)
-    save_df_to_s3(sellers_geo_df, s3, AWS_S3_BUCKET, f"{MONTH_YEAR}_sellers_geolocation.csv")
+    save_df_to_s3(sellers_geo_df, s3, AWS_S3_BUCKET, f"{MONTH_YEAR}_sellers")
     print("sellers_geolocation table loaded successfully")
 
     product_df = read_file_from_S3(s3, f"{AWS_S3_BUCKET}/raw/{MONTH_YEAR}_products.csv")
     product_df = product_clean_df(product_df)
-    save_df_to_s3(product_df, s3, AWS_S3_BUCKET, f"{MONTH_YEAR}_products.csv")
+    save_df_to_s3(product_df, s3, AWS_S3_BUCKET, f"{MONTH_YEAR}_products")
     print("products table loaded successfully")

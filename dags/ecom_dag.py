@@ -10,9 +10,10 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.constants import OUT_PATH, CURRENT_MONTH_YEAR
+from src.constants import OUT_PATH, CURRENT_MONTH_YEAR, AWS_S3_BUCKET
 from etl.load_to_s3 import connect_to_s3
 from pipelines.load_s3_pipeline import load_to_S3_pipeline, transform_pipeline
+from pipelines.fromS3_to_DW import load_to_DW_pipeline
 # from etl.clean_all import load_to_staging
 # from etl.tranform import transform_table
 
@@ -23,7 +24,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id="etl_ecomerc_pipeline_loadToS3",
+    dag_id="etl_ecomerc_pipeline_test_2",
     default_args=default_args,
     schedule_interval = "@monthly",
     catchup=False,
@@ -52,4 +53,10 @@ with DAG(
         op_kwargs = {"MONTH_YEAR": MONTH_YEAR}
     )
 
-    pull_api >> load_to_s3 >> [transfrom_load_to_s3, remove_files] 
+    load_to_DW = PythonOperator(
+        task_id = "load_to_DW",
+        python_callable = load_to_DW_pipeline,
+        op_kwargs = {"BUCKET_NAME": AWS_S3_BUCKET}
+    )
+
+    pull_api >> load_to_s3 >> [transfrom_load_to_s3, remove_files] >> load_to_DW
