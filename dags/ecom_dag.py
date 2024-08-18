@@ -24,7 +24,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id="etl_ecomerc_pipeline_test_2",
+    dag_id="etl_ecomerc_pipeline",
     default_args=default_args,
     schedule_interval = "@monthly",
     catchup=False,

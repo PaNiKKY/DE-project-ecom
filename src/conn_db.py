@@ -18,4 +18,4 @@ def create_data_warehouse():
     else:
         print(f"schema warehouses already exists")
     
-    return engine.connect()
+    return engine
