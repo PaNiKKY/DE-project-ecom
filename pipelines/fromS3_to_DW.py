@@ -1,6 +1,6 @@
 from etl.read_file_s3 import read_file_from_S3
 from etl.load_to_DW import load_to_postgres
-from src.conn_db import create_data_warehouse
+from src.connections import create_data_warehouse
 from etl.load_to_s3 import connect_to_s3
 from etl.transform_DW import tables_constraint
 import os

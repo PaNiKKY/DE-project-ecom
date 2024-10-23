@@ -1,6 +1,7 @@
-apache-airflow==2.9.2 
+apache-airflow==2.9.2
 pandas==2.0.0
-numpy==1.26.4 
-kaggle
+numpy==1.26.4
 configparser
-s3fs
+boto3
+kagglehub
+glob2
