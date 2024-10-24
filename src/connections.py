@@ -1,28 +1,13 @@
 from sqlalchemy import create_engine
-from sqlalchemy_utils import database_exists, create_database
-from sqlalchemy.schema import CreateSchema
-from .constants import DATABASE_HOST, DATABASE_PORT, DATABASE_USER, DATABASE_PASSWORD,AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, DATABASE_NAME
 import boto3
 
-def create_data_warehouse():
-    engine = create_engine(f"postgresql+psycopg2://{DATABASE_USER}:{DATABASE_PASSWORD}@{DATABASE_HOST}:{DATABASE_PORT}/{DATABASE_NAME}")
-
-    if not database_exists(engine.url):
-        create_database(engine.url)
-        print(f"database {DATABASE_NAME} created")
-    else:
-        print(f"database {DATABASE_NAME} already exists")
-    
-    if not engine.dialect.has_schema(engine, "warehouses"):
-        engine.execute(CreateSchema("warehouses"))
-        print(f"schema warehouses created")
-    else:
-        print(f"schema warehouses already exists")
+def connect_to_postgres(database_username, database_password, database_host, database_port, database_name):
+    engine = create_engine(f"postgresql+psycopg2://{database_username}:{database_password}@{database_host}:{database_port}/{database_name}")
     
     return engine
 
-def connect_to_s3():
-    session = boto3.Session(aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+def connect_to_s3(aws_access_key_id, aws_secret_access_key):
+    session = boto3.Session(aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
     try:
         s3 = session.client('s3')
     except Exception as e:

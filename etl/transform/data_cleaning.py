@@ -43,15 +43,15 @@ def order_clean_df(order_df):
     order_df = order_df.drop_duplicates()
     return order_df
 
-def payment_clean_df(payment_df):
-    # payment_df = pd.read_csv(f"/opt/airflow/data/{payment}.csv")
-    payment_df["order_id"] = payment_df["order_id"].astype(str)
-    payment_df["payment_sequential"] = payment_df["payment_sequential"].astype(int)
-    payment_df["payment_type"] = payment_df["payment_type"].astype(str)
-    payment_df["payment_installments"] = payment_df["payment_installments"].astype(int)
-    payment_df["payment_value"] = payment_df["payment_value"].astype(float)
-    payment_df = payment_df.drop_duplicates()
-    return payment_df
+# def payment_clean_df(payment_df):
+#     # payment_df = pd.read_csv(f"/opt/airflow/data/{payment}.csv")
+#     payment_df["order_id"] = payment_df["order_id"].astype(str)
+#     payment_df["payment_sequential"] = payment_df["payment_sequential"].astype(int)
+#     payment_df["payment_type"] = payment_df["payment_type"].astype(str)
+#     payment_df["payment_installments"] = payment_df["payment_installments"].astype(int)
+#     payment_df["payment_value"] = payment_df["payment_value"].astype(float)
+#     payment_df = payment_df.drop_duplicates()
+#     return payment_df
 
 def product_clean_df(product_df):
     # product_df = pd.read_csv(f"/opt/airflow/data/{product}.csv")
@@ -77,3 +77,20 @@ def seller_clean_df(seller_df):
     return seller_df
 
 
+def clean_df(df_name, df):
+    if df_name == "customers.csv":
+        df = customer_clean_df(df)
+    elif df_name == "geolocation.csv":
+        df = geolocation_clean_df(df)    
+    elif df_name == "order_items.csv":
+        df = order_items_clean_df(df)
+    elif df_name == "orders.csv":
+        df = order_clean_df(df)
+    # elif df_name == "payments.csv":
+    #     df = payment_clean_df(df)
+    elif df_name == "products.csv":
+        df = product_clean_df(df)
+    elif df_name == "sellers.csv":
+        df = seller_clean_df(df)
+
+    return df
