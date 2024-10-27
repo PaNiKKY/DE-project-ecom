@@ -1,10 +1,9 @@
-from sqlalchemy import create_engine
+import duckdb
 import boto3
 
-def connect_to_postgres(database_username, database_password, database_host, database_port, database_name):
-    engine = create_engine(f"postgresql+psycopg2://{database_username}:{database_password}@{database_host}:{database_port}/{database_name}")
-    
-    return engine
+def connect_to_duckdb(dw_name):
+    conn = duckdb.connect(f"data/{dw_name}.duckdb")
+    return conn
 
 def connect_to_s3(aws_access_key_id, aws_secret_access_key):
     session = boto3.Session(aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)

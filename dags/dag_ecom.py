@@ -6,16 +6,19 @@ import glob
 import sys
 from datetime import datetime
 
+
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from src.create_dw import create_data_warehouse
+from etl.load.load_to_DW import load_to_duckdb
 from src.connections import connect_to_s3
-from etl.load.load_to_DW import load_table_to_DW
 from etl.transform.transform_tables import  transform_tables
 from etl.transform.data_cleaning import clean_df
 from etl.transform.read_file_s3 import read_file_from_S3
 from etl.load.load_to_s3 import create_s3_bucket, create_staging_object, load_to_S3, write_df_to_s3
 from etl.extract.extract_from_kaggle import download_kaggle_dataset
-from src.constants import AWS_S3_BUCKET, CURRENT_MONTH_YEAR, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, DATABASE_HOST, DATABASE_PORT, DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME
+from src.constants import AWS_S3_BUCKET, CURRENT_MONTH_YEAR, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, DATABASE_NAME
 
 bucket_name ="ecom-de-project"
 raw_folder = "raw/"
@@ -23,11 +26,14 @@ cleaned_folder = "cleaned/"
 aws_access_key_id = AWS_ACCESS_KEY_ID
 aws_secret_access_key = AWS_SECRET_ACCESS_KEY
 bucket_name = AWS_S3_BUCKET
-database_host = DATABASE_HOST
-database_port = DATABASE_PORT
-database_user = DATABASE_USER
-database_password = DATABASE_PASSWORD 
 database_name = DATABASE_NAME
+
+clean_tables_list = ["customers_cleaned.csv",
+    "geolocation_cleaned.csv",
+    "order_items_cleaned.csv",
+    "orders_cleaned.csv",
+    "products_cleaned.csv",
+    "sellers_cleaned.csv"]
 @dag(
     dag_id="ecom_pipline",
     schedule="@monthly",
@@ -92,25 +98,21 @@ def ecom_dag():
         for file in clean_tables_list:
             read_file_df = read_file_from_S3(s3,
                                             bucket_name, 
-                                            f"{raw_folder}{CURRENT_MONTH_YEAR}_{file}"
+                                            f"{cleaned_folder}{CURRENT_MONTH_YEAR}_{file}"
                                         )
-            read_file_list[file.split("_")[0]] = read_file_df
-        
-        transform_df_dict = transform_tables(read_file_list)
+            read_file_list[file.split("_cleaned")[0]] = read_file_df
 
-        for table_name, df in transform_df_dict.items():
-            load_table_to_DW(table_name, 
-                            df,
-                            database_user,
-                            database_password,
-                            database_host, 
-                            database_port,
-                            database_name)
+        transform_tables_list= transform_tables(read_file_list)
+
+        create_data_warehouse(database_name)
+
+        for table in transform_tables_list:
+            load_to_duckdb(table)
 
     files = extract_data_kaggle()
     tales_list_form_s3 = load_raw_S3(files)
     clean_tables_list = clean_data(tales_list_form_s3)
-    # model_load_to_DW(clean_tables_list)
+    model_load_to_DW(clean_tables_list)
     
 
 ecom_dag()

@@ -43,16 +43,6 @@ def order_clean_df(order_df):
     order_df = order_df.drop_duplicates()
     return order_df
 
-# def payment_clean_df(payment_df):
-#     # payment_df = pd.read_csv(f"/opt/airflow/data/{payment}.csv")
-#     payment_df["order_id"] = payment_df["order_id"].astype(str)
-#     payment_df["payment_sequential"] = payment_df["payment_sequential"].astype(int)
-#     payment_df["payment_type"] = payment_df["payment_type"].astype(str)
-#     payment_df["payment_installments"] = payment_df["payment_installments"].astype(int)
-#     payment_df["payment_value"] = payment_df["payment_value"].astype(float)
-#     payment_df = payment_df.drop_duplicates()
-#     return payment_df
-
 def product_clean_df(product_df):
     # product_df = pd.read_csv(f"/opt/airflow/data/{product}.csv")
     product_df["product_id"] = product_df["product_id"].astype(str)
@@ -60,7 +50,7 @@ def product_clean_df(product_df):
     product_df["product_name_length"] = product_df["product_name_length"].astype(float)
     product_df["product_description_length"] = product_df["product_description_length"].astype(float)
     product_df["product_photos_qty"] = product_df["product_photos_qty"].astype(float)
-    product_df["product_weight_g"] = product_df["product_weight_g"].astype(float)
+    product_df["product_weight_g"] = product_df["produ  ct_weight_g"].astype(float)
     product_df["product_length_cm"] = product_df["product_length_cm"].astype(float)
     product_df["product_height_cm"] = product_df["product_height_cm"].astype(float)
     product_df["product_width_cm"] = product_df["product_width_cm"].astype(float)
@@ -86,8 +76,6 @@ def clean_df(df_name, df):
         df = order_items_clean_df(df)
     elif df_name == "orders.csv":
         df = order_clean_df(df)
-    # elif df_name == "payments.csv":
-    #     df = payment_clean_df(df)
     elif df_name == "products.csv":
         df = product_clean_df(df)
     elif df_name == "sellers.csv":
