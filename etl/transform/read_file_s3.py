@@ -1,5 +1,4 @@
 import pandas as pd
-from src.connections import connect_to_s3
 
 # read csv file from s3 with pandas dataframe
 def read_file_from_S3(s3, bucket_name: str, file_name: str):

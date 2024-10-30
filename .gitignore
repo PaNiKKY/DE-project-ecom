@@ -1,6 +1,6 @@
 ecommerceDE/
 .env
 data/databases/
+data/data_warehouse
 logs/
 config/
-data/data_warehouse
