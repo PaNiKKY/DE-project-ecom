@@ -1,7 +1,6 @@
 ecommerceDE/
-dockercompose.txt
 .env
-airflow.env
 data/databases/
 logs/
 config/
+data/data_warehouse
