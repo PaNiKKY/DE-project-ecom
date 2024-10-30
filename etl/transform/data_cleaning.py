@@ -28,6 +28,7 @@ def order_items_clean_df(order_items_df):
     order_items_df["price"] = order_items_df["price"].astype(float)
     order_items_df["freight_value"] = order_items_df["freight_value"].astype(float)
     order_items_df = order_items_df.drop_duplicates()
+    order_items_df = order_items_df.dropna()
     return order_items_df
 
 def order_clean_df(order_df):
@@ -41,6 +42,7 @@ def order_clean_df(order_df):
     order_df["order_delivered_customer_date"] = pd.to_datetime(order_df["order_delivered_customer_date"], errors="coerce")
     order_df["order_estimated_delivery_date"] = pd.to_datetime(order_df["order_estimated_delivery_date"], errors="coerce")
     order_df = order_df.drop_duplicates()
+    order_df = order_df.dropna()
     return order_df
 
 def product_clean_df(product_df):
@@ -50,7 +52,7 @@ def product_clean_df(product_df):
     product_df["product_name_length"] = product_df["product_name_length"].astype(float)
     product_df["product_description_length"] = product_df["product_description_length"].astype(float)
     product_df["product_photos_qty"] = product_df["product_photos_qty"].astype(float)
-    product_df["product_weight_g"] = product_df["produ  ct_weight_g"].astype(float)
+    product_df["product_weight_g"] = product_df["product_weight_g"].astype(float)
     product_df["product_length_cm"] = product_df["product_length_cm"].astype(float)
     product_df["product_height_cm"] = product_df["product_height_cm"].astype(float)
     product_df["product_width_cm"] = product_df["product_width_cm"].astype(float)

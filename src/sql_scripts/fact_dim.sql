@@ -1,34 +1,34 @@
 CREATE TABLE dim_customers (
     customer_id VARCHAR(50) NOT NULL PRIMARY KEY,
-    customer_unique_id VARCHAR(50) NOT NULL,
-    customer_zip_code_prefix VARCHAR(50) NOT NULL,
-    customer_city VARCHAR(50) NOT NULL,
-    customer_state VARCHAR(50) NOT NULL,
-    geolocation_lat FLOAT NOT NULL,
-    geolocation_lng FLOAT NOT NULL
+    customer_unique_id VARCHAR(50),
+    customer_zip_code_prefix VARCHAR(50),
+    customer_city VARCHAR(50),
+    customer_state VARCHAR(50),
+    geolocation_lat FLOAT,
+    geolocation_lng FLOAT
 );
 
 
 CREATE TABLE dim_sellers (
     seller_id VARCHAR(50) NOT NULL PRIMARY KEY,
-    seller_zip_code_prefix VARCHAR(50) NOT NULL,
-    seller_city VARCHAR(50) NOT NULL,
-    seller_state VARCHAR(50) NOT NULL,
-    geolocation_lat FLOAT NOT NULL,
-    geolocation_lng FLOAT NOT NULL
+    seller_zip_code_prefix VARCHAR(50),
+    seller_city VARCHAR(50),
+    seller_state VARCHAR(50),
+    geolocation_lat FLOAT,
+    geolocation_lng FLOAT
 );
 
 
 CREATE TABLE dim_products (
     product_id VARCHAR(50) NOT NULL PRIMARY KEY,
-    product_category VARCHAR(50) NOT NULL,
-    product_name_length INTEGER NOT NULL,   
-    product_description_length INTEGER NOT NULL,
-    product_photos_qty INTEGER NOT NULL,
-    product_weight_g INTEGER NOT NULL,
-    product_length_cm INTEGER NOT NULL,
-    product_height_cm INTEGER NOT NULL,
-    product_width_cm INTEGER NOT NULL
+    product_category VARCHAR(50),
+    product_name_length INTEGER,   
+    product_description_length INTEGER,
+    product_photos_qty INTEGER,
+    product_weight_g INTEGER,
+    product_length_cm INTEGER,
+    product_height_cm INTEGER,
+    product_width_cm INTEGER
 );
 
 CREATE TABLE fact_orders_items (

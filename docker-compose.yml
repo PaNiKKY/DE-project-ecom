@@ -80,6 +80,7 @@ x-airflow-common:
     - ./pipelines:/opt/airflow/pipelines
     - ./src:/opt/airflow/src
     - ./test:/opt/airflow/test
+    - ./app:/opt/airflow/app
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
@@ -146,6 +147,8 @@ services:
   airflow-scheduler:
     <<: *airflow-common
     command: scheduler
+    ports:
+        - "8501:8501"
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8974/health"]
       interval: 30s

@@ -37,7 +37,7 @@ INSERT INTO dim_date (
 )
 WITH generate_date AS (
     SELECT CAST(RANGE AS DATE) AS date_key 
-    FROM RANGE(DATE '2009-01-01', DATE '2013-12-31', INTERVAL 1 DAY)
+    FROM RANGE(DATE '2014-01-01', DATE '2040-12-31', INTERVAL 1 DAY)
 )
 SELECT 
     date_key AS date_key,

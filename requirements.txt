@@ -1,8 +1,9 @@
 apache-airflow==2.9.2
 pandas==2.0.0
-numpy==1.26.4
 configparser
 boto3
 kagglehub
 glob2
 duckdb
+streamlit
+plotly==5.24.1

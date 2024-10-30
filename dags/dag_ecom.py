@@ -1,6 +1,4 @@
 from airflow.decorators import dag, task
-from airflow.operators.python_operator import PythonOperator
-
 import os
 import glob
 import sys
@@ -12,7 +10,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.create_dw import create_data_warehouse
 from etl.load.load_to_DW import load_to_duckdb
-from src.connections import connect_to_s3
+from src.connections import connect_to_duckdb, connect_to_s3
 from etl.transform.transform_tables import  transform_tables
 from etl.transform.data_cleaning import clean_df
 from etl.transform.read_file_s3 import read_file_from_S3
@@ -43,6 +41,7 @@ clean_tables_list = ["customers_cleaned.csv",
 )
 def ecom_dag():
     s3 = connect_to_s3(aws_access_key_id, aws_secret_access_key)
+    duckdb_conn = connect_to_duckdb(database_name)
     @task
     def extract_data_kaggle():
         path_files = download_kaggle_dataset("devarajv88/target-dataset")
@@ -104,10 +103,12 @@ def ecom_dag():
 
         transform_tables_list= transform_tables(read_file_list)
 
-        create_data_warehouse(database_name)
-
-        for table in transform_tables_list:
-            load_to_duckdb(table)
+        create_data_warehouse(duckdb_conn)
+        
+        load_to_duckdb(duckdb_conn,transform_tables_list["dim_customers"])
+        load_to_duckdb(duckdb_conn,transform_tables_list["dim_sellers"])
+        load_to_duckdb(duckdb_conn,transform_tables_list["dim_products"])
+        load_to_duckdb(duckdb_conn,transform_tables_list["fact_orders_items"])
 
     files = extract_data_kaggle()
     tales_list_form_s3 = load_raw_S3(files)

@@ -11,8 +11,7 @@ def create_tables(conn, sql_file):
         conn.sql(script.read())
     print(f"table {os.path.basename(sql_file)} created successfully")
 
-def create_data_warehouse(data_warehouse):
-    conn = connect_to_duckdb(data_warehouse)
+def create_data_warehouse(conn):
     tables = conn.sql("SHOW TABLES").fetchall()
     if len(tables) == 0:
         create_tables(conn, "dim_date.sql")

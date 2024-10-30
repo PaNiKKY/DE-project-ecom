@@ -29,7 +29,7 @@ WITH generate_time AS (
 )
 
 SELECT 
-    time_key,
+    time_key::TIME AS time_key,
     date_part('hour', time_key) AS hour,
     date_part('minute', time_key) AS minute,
     date_part('second', time_key) AS second,
